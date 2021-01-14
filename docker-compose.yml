@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  vuttr_db:
+    image: postgres
+    container_name: vuttr-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: vuttr
+    ports:
+      - 5432:5432
