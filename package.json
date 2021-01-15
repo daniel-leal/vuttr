@@ -13,7 +13,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "bcryptjs": "^2.4.3",
     "celebrate": "^13.0.4",
     "class-transformer": "^0.3.2",

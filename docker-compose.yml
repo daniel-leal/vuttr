@@ -15,17 +15,21 @@ services:
 
   app:
     container_name: vuttr-app
-    image: vuttr:build_${BUILD_NUMBER}
+    image: vuttr:1.0
     build:
       context: .
     networks:
       - prod_net_back
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWD=docker
-      - DATABASE_UPDATE=none
+    env_file: .env
+    # environment:
+    #   - POSTGRES_HOST=db
+    #   - DATABASE_PORT=5432
+    #   - POSTGRES_USER=postgres
+    #   - POSTGRES_PASS=docker
+    #   - DATABASE_UPDATE=none
+    #   - POSTGRES_NAME=vuttr
+    ports:
+      - 3000:3000
     depends_on:
       - db
 

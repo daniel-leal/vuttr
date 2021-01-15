@@ -1,19 +1,17 @@
 FROM node:14.5.0
-
 WORKDIR /usr/src/app
-
-ENV NODE_ENV=development
-
-COPY package.json .
-
+COPY package*.json ./
+COPY . .
 RUN npm install
-
-ADD . /usr/src/app
-
 RUN npm run build
 
-COPY ./dist .
 
-EXPOSE 3333
+FROM node:14.5.0
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install --only=production
+COPY --from=0 /usr/src/app/dist ./dist
 
-CMD ["pm2-runtime","server.js"]
+EXPOSE 3000
+
+CMD ["node", "dist/shared/infra/http/server.js"]
