@@ -24,13 +24,6 @@ services:
       - prod_net_back
     env_file:
       - .env
-    # environment:
-    #   - POSTGRES_HOST=db
-    #   - DATABASE_PORT=5432
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_PASS=docker
-    #   - DATABASE_UPDATE=none
-    #   - POSTGRES_NAME=vuttr
     ports:
       - 3000:3000
     depends_on:

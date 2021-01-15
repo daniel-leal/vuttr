@@ -11,13 +11,13 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 
-routes.use('/', (req, res) =>
+routes.get('/', (req, res) => {
   res.json({
-    app: 'Vuttr',
+    name: 'vuttr',
     description: 'Very Useful Tools to Remember',
-    status: 'ok',
     version: 1.0,
-  }),
-);
+    status: 'ok',
+  });
+});
 
 export default routes;
