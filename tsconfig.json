@@ -18,5 +18,6 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
+  "include": ["src/**/*"],
   "exclude": ["docs/*", "coverage/*", "jest.config.js", "prettier.config.js"]
 }

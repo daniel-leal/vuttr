@@ -1,12 +1,37 @@
 version: '3.1'
 
 services:
-  vuttr_db:
-    image: postgres
-    container_name: vuttr-db
+  db:
+    container_name: pg-prod
+    image: postgres:9.6
+    networks:
+      - prod_net_back
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: vuttr
-    ports:
-      - 5432:5432
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=vuttr
+    volumes:
+      - prod_postgresql:/var/lib/postgresql
+      - prod_postgresql_data:/var/lib/postgresql/data
+
+  app:
+    container_name: vuttr-app
+    image: vuttr:build_${BUILD_NUMBER}
+    build:
+      context: .
+    networks:
+      - prod_net_back
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWD=docker
+      - DATABASE_UPDATE=none
+    depends_on:
+      - db
+
+networks:
+  prod_net_back:
+
+volumes:
+  prod_postgresql:
+  prod_postgresql_data:
