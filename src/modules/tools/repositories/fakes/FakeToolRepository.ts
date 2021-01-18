@@ -1,12 +1,15 @@
 import { v4 as uuid_v4 } from 'uuid';
 
-import IToolsRepository from '@modules/tools/repositories/IToolsRepository';
 import ICreateToolDTO from '@modules/tools/dtos/ICreateToolDTO';
-
-import Tool from '../../infra/typeorm/entities/Tool';
+import Tool from '@modules/tools/infra/typeorm/entities/Tool';
+import IToolsRepository from '../IToolsRepository';
 
 class FakeToolsRepository implements IToolsRepository {
   private tools: Tool[] = [];
+
+  public async findAll(): Promise<Tool[]> {
+    return this.tools;
+  }
 
   public async findById(id: string): Promise<Tool | undefined> {
     const findTool = this.tools.find(tool => tool.id === id);
@@ -14,10 +17,14 @@ class FakeToolsRepository implements IToolsRepository {
     return findTool;
   }
 
-  public async findByTag(tag: string): Promise<Tool | undefined> {
-    const findTool = this.tools.find(tool =>
-      tool.tags.filter(tg => tg === tag),
-    );
+  public async findByTag(tag: string): Promise<Tool[] | undefined> {
+    const findTools = this.tools.filter(tool => tool.tags.includes(tag));
+
+    return findTools;
+  }
+
+  public async findByTitle(title: string): Promise<Tool | undefined> {
+    const findTool = this.tools.find(tool => tool.title === title);
 
     return findTool;
   }

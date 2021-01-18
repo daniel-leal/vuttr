@@ -24,12 +24,26 @@ export default class CreateTools1610720029017 implements MigrationInterface {
             length: '80',
           },
           {
+            name: 'link',
+            type: 'varchar',
+          },
+          {
             name: 'description',
             type: 'text',
           },
           {
             name: 'tags',
             type: 'varchar',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
         foreignKeys: [
