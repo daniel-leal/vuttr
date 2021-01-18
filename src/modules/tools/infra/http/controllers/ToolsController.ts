@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { classToClass } from 'class-transformer';
 
 import CreateToolService from '@modules/tools/services/CreateToolService';
 import ListToolsService from '@modules/tools/services/ListToolsService';
 import ListToolsByTagService from '@modules/tools/services/ListToolsByTagService';
+import DeleteToolService from '@modules/tools/services/DeleteToolService';
+
 import Tool from '../../typeorm/entities/Tool';
 
 export default class ToolsController {
@@ -22,7 +23,7 @@ export default class ToolsController {
       user_id,
     });
 
-    return response.json(classToClass(tool));
+    return response.status(201).json(tool);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -39,5 +40,15 @@ export default class ToolsController {
     }
 
     return response.json(tools);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteTool = container.resolve(DeleteToolService);
+
+    await deleteTool.execute({ id });
+
+    return response.status(204).send();
   }
 }

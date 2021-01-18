@@ -12,5 +12,7 @@ export default interface IToolsRepository {
 
   create(data: ICreateToolDTO): Promise<Tool>;
 
+  delete(tool: Tool): Promise<void>;
+
   save(tool: Tool): Promise<Tool>;
 }

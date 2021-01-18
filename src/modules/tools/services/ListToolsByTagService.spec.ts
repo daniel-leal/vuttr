@@ -1,6 +1,6 @@
 // import AppError from '@shared/errors/AppError';
 
-import FakeToolsRepository from '../repositories/fakes/FakeToolRepository';
+import FakeToolsRepository from '../repositories/fakes/FakeToolsRepository';
 import ListToolsByTagService from './ListToolsByTagService';
 
 let fakeToolsRepository: FakeToolsRepository;

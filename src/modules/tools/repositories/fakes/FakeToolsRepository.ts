@@ -39,6 +39,10 @@ class FakeToolsRepository implements IToolsRepository {
     return tool;
   }
 
+  public async delete(tool: Tool): Promise<void> {
+    this.tools = this.tools.filter(t => t !== tool);
+  }
+
   public async save(tool: Tool): Promise<Tool> {
     const findIndex = this.tools.findIndex(findTool => findTool.id === tool.id);
 

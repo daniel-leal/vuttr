@@ -48,6 +48,10 @@ class ToolsRepository implements IToolsRepository {
     return tool;
   }
 
+  public async delete(tool: Tool): Promise<void> {
+    await this.ormRepository.remove(tool);
+  }
+
   public async save(tool: Tool): Promise<Tool> {
     return this.ormRepository.save(tool);
   }

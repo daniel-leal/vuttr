@@ -24,4 +24,6 @@ toolsRouter.post(
   toolsController.create,
 );
 
+toolsRouter.delete('/:id', toolsController.delete);
+
 export default toolsRouter;
