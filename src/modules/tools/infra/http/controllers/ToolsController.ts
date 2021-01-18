@@ -3,10 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateToolService from '@modules/tools/services/CreateToolService';
 import ListToolsService from '@modules/tools/services/ListToolsService';
-import ListToolsByTagService from '@modules/tools/services/ListToolsByTagService';
 import DeleteToolService from '@modules/tools/services/DeleteToolService';
-
-import Tool from '../../typeorm/entities/Tool';
 
 export default class ToolsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -27,17 +24,9 @@ export default class ToolsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    let tools: Tool[] = [];
+    const listTools = container.resolve(ListToolsService);
 
-    const { tag } = request.query;
-
-    if (tag) {
-      const listToolsByTag = container.resolve(ListToolsByTagService);
-      tools = await listToolsByTag.execute({ tag });
-    } else {
-      const listTools = container.resolve(ListToolsService);
-      tools = await listTools.execute();
-    }
+    const tools = await listTools.execute({ tag: request.query.tag as string });
 
     return response.json(tools);
   }

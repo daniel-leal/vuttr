@@ -47,7 +47,7 @@ describe('DeleteTool', () => {
 
     await deleteToolService.execute({ id: t1.id });
 
-    const tools = await listToolsService.execute();
+    const tools = await listToolsService.execute({ tag: undefined });
 
     expect(tools).toEqual([t2]);
   });
