@@ -156,7 +156,7 @@ Resposta:
 Status: 204 No Content
 ```
 
-## 🤓 Critérios de Aceitação
+## 🤓 Acceptance Criteria
 
 - A API deve ser real e escrita por você. Ferramentas que criam APIs
   automaticamente (Loopback, json-server, etc) não são aceitas;
