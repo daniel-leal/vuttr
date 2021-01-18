@@ -7,7 +7,11 @@ import ToolsController from '../controllers/ToolsController';
 const toolsRouter = Router();
 const toolsController = new ToolsController();
 
-toolsRouter.get('/', toolsController.index);
+toolsRouter.get(
+  '/',
+  celebrate({ [Segments.QUERY]: { tag: Joi.string().optional() } }),
+  toolsController.index,
+);
 
 toolsRouter.use(ensureAuthenticated);
 
@@ -24,6 +28,14 @@ toolsRouter.post(
   toolsController.create,
 );
 
-toolsRouter.delete('/:id', toolsController.delete);
+toolsRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  toolsController.delete,
+);
 
 export default toolsRouter;
