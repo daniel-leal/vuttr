@@ -20,14 +20,14 @@ export default class ToolsController {
       user_id,
     });
 
-    return response.json(tool);
+    return response.json(classToClass(tool));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
     const listTools = container.resolve(ListToolsService);
 
-    const tools = listTools.execute();
+    const tools = await listTools.execute();
 
-    return response.json(classToClass(tools));
+    return response.json(tools);
   }
 }

@@ -11,7 +11,7 @@ class ListToolService {
   ) {}
 
   public async execute(): Promise<Tool[]> {
-    const tools = this.toolsRepository.findAll();
+    const tools = await this.toolsRepository.findAll();
 
     return tools;
   }
