@@ -17,7 +17,7 @@ class FakeToolsRepository implements IToolsRepository {
     return findTool;
   }
 
-  public async findByTag(tag: string): Promise<Tool[] | undefined> {
+  public async findByTag(tag: string): Promise<Tool[]> {
     const findTools = this.tools.filter(tool => tool.tags.includes(tag));
 
     return findTools;
