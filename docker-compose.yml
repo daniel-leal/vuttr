@@ -15,6 +15,14 @@ services:
     ports:
       - 5432:5432
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - prod_net_back
+    ports:
+      - 6379:6379
+
   app:
     container_name: vuttr-app
     image: vuttr:1.0

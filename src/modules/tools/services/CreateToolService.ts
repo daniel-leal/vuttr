@@ -2,8 +2,10 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
-import Tool from '../infra/typeorm/entities/Tool';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IToolsRepository from '../repositories/IToolsRepository';
+
+import Tool from '../infra/typeorm/entities/Tool';
 
 interface IRequest {
   user_id: string;
@@ -18,6 +20,9 @@ class CreateToolService {
   constructor(
     @inject('ToolsRepository')
     private toolsRepository: IToolsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -38,6 +43,8 @@ class CreateToolService {
       tags,
       user_id,
     });
+
+    await this.cacheProvider.invalidatePrefix(`tools-list`);
 
     return tool;
   }
