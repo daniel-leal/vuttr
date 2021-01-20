@@ -1,15 +1,22 @@
 import AppError from '@shared/errors/AppError';
 
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeToolsRepository from '../repositories/fakes/FakeToolsRepository';
 import CreateToolService from './CreateToolService';
 
+let fakeCacheProvider: FakeCacheProvider;
 let fakeToolsRepository: FakeToolsRepository;
 let createToolService: CreateToolService;
 
 describe('CreateTool', () => {
   beforeEach(() => {
+    fakeCacheProvider = new FakeCacheProvider();
     fakeToolsRepository = new FakeToolsRepository();
-    createToolService = new CreateToolService(fakeToolsRepository);
+
+    createToolService = new CreateToolService(
+      fakeToolsRepository,
+      fakeCacheProvider,
+    );
   });
 
   it('should be able to create a new tool', async () => {

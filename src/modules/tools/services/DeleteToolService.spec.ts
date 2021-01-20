@@ -2,11 +2,13 @@
 
 import AppError from '@shared/errors/AppError';
 
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeToolsRepository from '../repositories/fakes/FakeToolsRepository';
 import CreateToolService from './CreateToolService';
 import ListToolsService from './ListToolsService';
 import DeleteToolService from './DeleteToolService';
 
+let fakeCacheProvider: FakeCacheProvider;
 let fakeToolsRepository: FakeToolsRepository;
 let deleteToolService: DeleteToolService;
 let createToolService: CreateToolService;
@@ -14,10 +16,20 @@ let listToolsService: ListToolsService;
 
 describe('DeleteTool', () => {
   beforeEach(() => {
+    fakeCacheProvider = new FakeCacheProvider();
     fakeToolsRepository = new FakeToolsRepository();
+
     deleteToolService = new DeleteToolService(fakeToolsRepository);
-    createToolService = new CreateToolService(fakeToolsRepository);
-    listToolsService = new ListToolsService(fakeToolsRepository);
+
+    createToolService = new CreateToolService(
+      fakeToolsRepository,
+      fakeCacheProvider,
+    );
+
+    listToolsService = new ListToolsService(
+      fakeToolsRepository,
+      fakeCacheProvider,
+    );
   });
 
   it('should be able to delete a tool', async () => {
