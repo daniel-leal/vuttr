@@ -55,7 +55,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }} 
         script: |
           cd ~/app/vuttr
-          ./node_modules/.bin/typeorm migration:run
+          yarn typeorm migration:run
           
     - name: Run Migrations on Digital Ocean
       uses: appleboy/ssh-action@master
