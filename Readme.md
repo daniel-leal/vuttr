@@ -18,8 +18,10 @@
   <a href="https://github.com/daniel-leal/vuttr/issues">
     <img alt="Repository issues" src="https://img.shields.io/github/issues/daniel-leal/vuttr?color=%23FF9000">
   </a>
-
-  <img alt="GitHub" src="https://img.shields.io/github/license/daniel-leal/vuttr?color=%23FF9000">
+  
+  <a href="https://github.com/daniel-leal/vuttr/actions">
+    <img alt="GitHub" src="https://github.com/daniel-leal/vuttr/workflows/CI/badge.svg">
+  </a>
 </p>
 
 <p align="center">
